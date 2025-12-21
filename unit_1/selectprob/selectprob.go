@@ -35,11 +35,13 @@ func ConfigurableWebsiteRacer(websites []string, timeout time.Duration) (string,
 		}()
 	}
 
+	timeOutTime := time.After(timeout)
+
 	for range websites {
 		select {
 		case r := <-resultChannel:
 			websiteStatus[r.url] = r.duration
-		case <-time.After(timeout):
+		case <-timeOutTime:
 			return "", fmt.Errorf("Got err because it takes more than %s seconds", timeout)
 
 		}
@@ -57,15 +59,16 @@ func fastestWebsite(website string, websiteStatus map[string]time.Duration) stri
 			minValue = key
 		}
 	}
-
-	fmt.Printf("%v", websiteStatus)
-
 	return minValue
 
 }
 
 func ping(url string) time.Duration {
 	start := time.Now()
-	http.Get(url)
+	resp, err := http.Get(url)
+	if err != nil {
+		return 0
+	}
+	defer resp.Body.Close()
 	return time.Since(start)
 }
