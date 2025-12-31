@@ -28,7 +28,6 @@ func MinutesToRadians(time time.Time) float64 {
 }
 
 func HourToRadians(time time.Time) float64 {
-	12
 	return (MinutesToRadians(time) / hourInClock) + (math.Pi / (hourInHalfClock / float64(time.Hour()%hourInClock)))
 }
 
