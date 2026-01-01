@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Blogs</title>
+</head>
+<body>
+<nav role="navigation">
+    <div>
+        <h1>Personal Blogs</h1>
+        <ul>
+            <li><a href="/">home</a></li>
+            <li><a href="about">about</a></li>
+            <li><a href="archive">all blogs</a></li>
+        </ul>
+    </div>
+</nav>
+<main>
+
+<h1>New</h1>
+<p>New Post this is</p>
+Tags: <ul><li>NEw</li><li>trial</li></ul>
+
+<h2 id="new-new-new-every-thing-is-new-here-1">New New new every thing is new here</h2>
+
+
+</main>
+<footer>
+    <ul>
+        <li><a href="https://instagram.com/filmic_render">Instagram</a></li>
+        <li><a href="https://github.com/AnuragVish1">GitHub</a></li>
+    </ul>
+</footer>
+</body>
+</html>
+
