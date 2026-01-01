@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"html/template"
 	"io"
+	"strings"
 
 	"github.com/gomarkdown/markdown"
 	"github.com/gomarkdown/markdown/html"
@@ -20,6 +21,14 @@ type Post struct {
 	Description string
 	Body        string
 	Tags        []string
+}
+
+type PostViewModel struct {
+	Title          string
+	SenitisedTitle string
+	Description    string
+	Body           string
+	Tags           []string
 }
 
 func (p Post) ToHTML() template.HTML {
@@ -61,4 +70,15 @@ func (p *PostRender) Render(writer io.Writer, post Post) error {
 		return err
 	}
 	return nil
+}
+
+func (p *PostRender) RenderIndex(writer io.Writer, posts []Post) error {
+	if err := p.templ.ExecuteTemplate(writer, "index.gohtml", posts); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (p Post) ReplaceHypens() string {
+	return strings.ToLower(strings.ReplaceAll(p.Title, " ", "-"))
 }
